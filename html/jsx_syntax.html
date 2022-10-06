@@ -31,6 +31,16 @@
                     <span style={{ color: 'white', fontSize: '29px' }}>{myData.toLocaleUpperCase()}</span>
                 </h2>
                 <input type="text" />
+                {
+                    // jsx会把尖括号开头的内容都当做html标签解析，所以需要用{}包裹js表达式
+                    // 每个虚拟dom需要有一个key属性，但是不会在真实dom中显示
+                    arr.map((item, index) => {
+                        console.log(<h3 key={index}>{item}</h3>);
+                        console.log({ item, index });
+                        console.log(item, index);
+                        return <h3 key={index}>{item}</h3>
+                    })
+                }
             </div>
         )
         ReactDOM.render(VDOM, document.getElementById('test'))
