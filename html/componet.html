@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Component</title>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 函数定义组件：
+        // 1. 函数名必须大写字母开头
+        // 2. 函数必须有返回值，返回值必须是一个虚拟DOM，由React负责调用函数，将返回的虚拟DOM渲染到页面中
+        // 3. 函数组件中，this指向undefined，因为babel转义后开启了严格模式
+        function FuncComponent() {
+            console.log(this);
+            return <h1>React Function Component, 适用于简单组件</h1>
+        }
+        ReactDOM.render(<FuncComponent />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
