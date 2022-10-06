@@ -23,6 +23,17 @@
             return <h1>React Function Component, 适用于简单组件</h1>
         }
         ReactDOM.render(<FuncComponent />, document.getElementById('test'))
+
+        // 类定义组件：
+        // 1. 类名必须大写字母开头
+        // 2. 类必须有render方法且有虚拟DOM的返回值，由React负责创建实例，调用render方法，将返回的虚拟DOM渲染到页面中
+        // 3. 类组件中，this指向当前组件的实例对象
+        class ClassComponent extends React.Component {
+            render() {
+                console.log(this);
+                return <h1>React Class Component, 适用于复杂组件</h1>
+            }
+        }
     </script>
 </body>
 
