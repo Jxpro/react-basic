@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello React</title>
+    <style>
+        .title {
+            color: red;
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        const myId = 'Xin'
+        const myData = 'Hello React'
+        const arr = ['a', 'b', 'c']
+        // Vue Language Features (Volar)插件暂时会影响jsx语法的高亮，需要禁用
+        // Vetur插件不影响，可启用
+        const VDOM = (
+            <div>
+                <h2 className='title' id={myId.toLocaleLowerCase()}>
+                    <span style={{ color: 'white', fontSize: '29px' }}>{myData.toLocaleUpperCase()}</span>
+                </h2>
+                <input type="text" />
+            </div>
+        )
+        ReactDOM.render(VDOM, document.getElementById('test'))
+
+        /*
+        jsx语法规则：
+        1. 定义虚拟D0M时，不要写引号，标签必须闭合
+        2. 标签首字母
+            1. 小写字母开头，表示html标签
+            2. 大写字母开头，表示组件
+        3. 标签中混入js表达式
+            1. {}中写js表达式
+            2. js表达式要有返回值
+        4. 样式类名指定不同的方式
+            1. class -> className
+            2. style -> style={{key: value}}
+        5. 内联样式，不能为数值类型，需要使用字符串
+        6. 标签中混入子标签
+            1. 子标签缩进
+            2. 子标签要有唯一的根标签包裹
+        */
+
+    </script>
+</body>
+
+</html>
