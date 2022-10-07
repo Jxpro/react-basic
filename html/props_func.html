@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Props</title>
+</head>
+
+<body>
+    <div id="test1"></div>
+    <div id="test2"></div>
+    <div id="test3"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script src="../js/prop-types.js"></script>
+
+    <script type="text/babel">
+        // 通过props传递数据，props是只读的，不能修改
+        function People(props) {
+            const { name, age, sex } = props
+            return (
+                < ul >
+                    <li>姓名：{name}</li>
+                    <li>年龄：{age}</li>
+                    <li>性别：{sex}</li>
+                </ul >
+            )
+        }
+        // 对props进行类型校验
+        // 需要在原型上添加名为propTypes的属性
+        People.propTypes = {
+            name: PropTypes.string.isRequired,
+            age: PropTypes.number,
+            sex: PropTypes.string,
+            behavior: PropTypes.func
+        }
+        // 设置props默认值
+        // 需要在原型上添加名为defaultProps的属性
+        People.defaultProps = {
+            age: 18,
+            sex: 'F'
+        }
+
+        // 向props传递数据
+        ReactDOM.render(<People name='tom' age='18' sex='F' />, document.getElementById('test1'))
+
+        // 传递number类型的数据
+        ReactDOM.render(<People name='tom' age={18} sex='F' />, document.getElementById('test2'))
+
+        // 批量传递props
+        const p = { name: 'jake', age: 20, sex: 'F' }
+        ReactDOM.render(<People {...p} />, document.getElementById('test3'))
+    </script>
+</body>
+
+</html>
