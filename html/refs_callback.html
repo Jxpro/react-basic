@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refs In Callback Form</title>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class StringRefs extends React.Component {
+            render() {
+                // 内联形式的回调ref会在更新页面时被调用两次
+                // 这是因为在每次渲染时都会创建一个新的函数实例，所以React无法保证两次回调参数的一致性
+                // 因此会在每次渲染时都调用一次回调，传入null和DOM元素，以保证ref的一致性
+                // 通过将ref的回调函数定义成class的绑定函数的方式可以避免上述问题，但是大多数情况下它是无关紧要的
+                return (
+                    <div>
+                        <input type="text" ref={currentNode => this.myInput = currentNode} />&nbsp;
+                        <button onClick={this.show1}>Focus the text input</button>&nbsp;
+                        <input type="text" ref={c => this.myInput2 = c} onBlur={this.show2} />
+                    </div>
+                )
+            }
+            show1 = () => {
+                alert(this.myInput.value)
+            }
+            show2 = () => {
+                alert(this.myInput2.value)
+            }
+        }
+
+        ReactDOM.render(<StringRefs />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
