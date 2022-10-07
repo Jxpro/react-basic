@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refs In String Form</title>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class StringRefs extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref="myInput" />&nbsp;
+                        <button onClick={this.show1}>Focus the text input</button>&nbsp;
+                        <input type="text" ref="myInput2" onBlur={this.show2} />
+                    </div>
+                )
+            }
+            show1 = () => {
+                alert(this.refs.myInput.value)
+            }
+            show2 = () => {
+                alert(this.refs.myInput2.value)
+            }
+        }
+
+        ReactDOM.render(<StringRefs />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
