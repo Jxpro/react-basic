@@ -29,22 +29,20 @@
                     </ul >
                 )
             }
-        }
-
-        // 对props进行类型校验
-        // 需要在原型上添加名为propTypes的属性，而不是在实例上添加
-        People.propTypes = {
-            name: PropTypes.string.isRequired,
-            age: PropTypes.number,
-            sex: PropTypes.string,
-            behavior: PropTypes.func
-        }
-
-        // 设置props默认值
-        // 需要在原型上添加名为defaultProps的属性，而不是在实例上添加
-        People.defaultProps = {
-            age: 18,
-            sex: 'F'
+            // 对props进行类型校验
+            // 使用static关键字可以将属性添加到原型上而不是实例上（React要求在原型上）
+            static propTypes = {
+                name: PropTypes.string.isRequired,
+                age: PropTypes.number,
+                sex: PropTypes.string,
+                behavior: PropTypes.func
+            }
+            // 设置props默认值
+            // 使用static关键字可以将属性添加到原型上而不是实例上（React要求在原型上）
+            static defaultProps = {
+                age: 18,
+                sex: 'F'
+            }
         }
 
         // 向props传递数据
