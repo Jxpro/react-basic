@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Componet State Full</title>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+    <script type="text/babel">
+        // React state 完整版
+        class Weather extends React.Component {
+            constructor(props) {
+                super(props)
+                // state可以不写成对象，但是会有警告
+                // this.state = true
+                this.state = {
+                    isHot: true,
+                    extra: 'extra'
+                }
+                // bind返回新对象，将函数调用的this指向传入的参数，不会改变原对象
+                this.changeWeather = this.changeWeather.bind(this)
+            }
+            render() {
+                console.log(this);
+                return (
+                    // onclick需要写成onClick，否则会报错
+                    <div>
+                        <h2 onClick={this.changeWeather}>今天天气{this.state.isHot ? '炎热' : '凉爽'}</h2>
+                    </div>
+                )
+            }
+            changeWeather() {
+                // 需要使用setState方法改变state，否则不会重新渲染页面
+                // setState更新策略是合并更新，不会覆盖原有的state
+                this.setState({
+                    isHot: !this.state.isHot
+                })
+            }
+        }
+        ReactDOM.render(<Weather />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
