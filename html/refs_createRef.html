@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refs In createRef Form</title>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script src="../js/react.development.js"></script>
+    <script src="../js/react-dom.development.js"></script>
+    <script src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class StringRefs extends React.Component {
+            // createRef()方法创建的ref对象每次仅能被一个元素所引用
+            // 多个元素引用同一个ref对象时，最后一个元素的ref对象会覆盖前面的元素的ref对象
+            // 因此引用多个元素时需要使用createRef创建多个ref对象
+            myInput = React.createRef()
+            myInput2 = React.createRef()
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref={this.myInput} />&nbsp;
+                        <button onClick={this.show1}>Focus the text input</button>&nbsp;
+                        <input type="text" ref={this.myInput2} onBlur={this.show2} />
+                    </div>
+                )
+            }
+            show1 = () => {
+                alert(this.myInput.current.value)
+            }
+            show2 = () => {
+                alert(this.myInput2.current.value)
+            }
+        }
+
+        ReactDOM.render(<StringRefs />, document.getElementById('test'))
+    </script>
+</body>
+
+</html>
