@@ -24,21 +24,18 @@
             render() {
                 return (
                     <form action="" onSubmit={this.printInfo}>
-                        用户名：<input type="text" onChange={this.saveUsername} />&nbsp;
-                        密码：<input type="text" onChange={this.savePassword} />&nbsp;
+                        用户名：<input type="text" onChange={this.saveFormData('username')} />&nbsp;
+                        密码：<input type="text" onChange={this.saveFormData('password')} />&nbsp;
                         <button >提交</button>
                     </form>
                 )
             }
-            saveUsername = (event) => {
-                this.setState({
-                    username: event.target.value
-                })
-            }
-            savePassword = (event) => {
-                this.setState({
-                    password: event.target.value
-                })
+            saveFormData = key => {
+                return event => {
+                    this.setState({
+                        [key]: event.target.value
+                    })
+                }
             }
             printInfo = (event) => {
                 event.preventDefault();
