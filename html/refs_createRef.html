@@ -19,21 +19,20 @@
             // 多个元素引用同一个ref对象时，最后一个元素的ref对象会覆盖前面的元素的ref对象
             // 因此引用多个元素时需要使用createRef创建多个ref对象
             myInput = React.createRef()
-            myInput2 = React.createRef()
             render() {
                 return (
                     <div>
                         <input type="text" ref={this.myInput} />&nbsp;
                         <button onClick={this.show1}>Focus the text input</button>&nbsp;
-                        <input type="text" ref={this.myInput2} onBlur={this.show2} />
+                        <input type="text" onBlur={this.show2} />
                     </div>
                 )
             }
             show1 = () => {
                 alert(this.myInput.current.value)
             }
-            show2 = () => {
-                alert(this.myInput2.current.value)
+            show2 = event => {
+                alert(event.target.value)
             }
         }
 
